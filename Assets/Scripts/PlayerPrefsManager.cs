@@ -26,42 +26,40 @@ public class PlayerPrefsManager : MonoBehaviour
         return false;
     }
 
-    public float difficulty
+    #region volume
+    public static void SetVolume(float value)
     {
-        get
+        if (!(value > 0f && value < 1f))
         {
-            return PlayerPrefs.GetFloat(DIFF_KEY);
+            Debug.LogError("Out of range");
+            return;
         }
 
-        set
-        {
-            if (!(value > 0f && value < 1f))
-            {
-                Debug.LogError("Out of range");
-                return;
-            }
-
-            PlayerPrefs.SetFloat(DIFF_KEY, value);
-        }
+        PlayerPrefs.SetFloat(MASTER_VOLUME_KEY, value);
     }
 
-    public float master_volume
+    public static float GetVolume()
     {
-        get
+        return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY);
+    }
+    #endregion volume
+
+
+    #region difficulty
+    public static void SetDifficulty(float value)
+    {
+        if (!(value > 0f && value < 3.1f))
         {
-            return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY);
+            Debug.LogError("Out of range");
+            return;
         }
 
-        set
-        {
-            if (!(value > 0f && value < 1f))
-            {
-                Debug.LogError("Out of range");
-                return;
-            }
-
-            PlayerPrefs.SetFloat(MASTER_VOLUME_KEY, value);
-        }
+        PlayerPrefs.SetFloat(DIFF_KEY, value);
     }
 
+    public static float GetDifficulty()
+    {
+        return PlayerPrefs.GetFloat(DIFF_KEY);
+    }
+    #endregion difficulty controls
 }
